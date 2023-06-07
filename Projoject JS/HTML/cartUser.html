@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/cartUser.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="https://media.loveitopcdn.com/3807/logo-chanel-dongphucsongphu-2-01.jpg" type="image/x-icon">
+    <title>Cart || Chanel</title>
+</head>
+
+<body>
+    <div id="vitri2"></div>
+    <div  id =""class="header-fixed" >
+        <div class="logo">
+            <div class="line"></div>
+            <h1>CHANEL</h1>
+        </div>
+        <nav class="header-conten-1">
+            <h4 onclick="chanelShop()"> <i class="fa-solid fa-arrow-left" style="color: #303131;"></i> CHANEL SHOP</h4>
+            <divv class="header-input">
+                <input type="text" placeholder="Nhập tên sản phẩm bạn muốn tìm kiếm...">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </divv>
+            <div class="user">
+                <div><i class="fa-solid fa-user"></i></div>
+                <p></p>
+                <div class="nameUser"></div>
+                <p></p>
+                <div onclick="logUot()">Đăng xuất</div>
+            </div>
+        </nav>
+        </div>
+        <div class="total"><span>Tổng Số Tiền:</span></div>
+        <button class="payCart" onclick="payCart()">Thanh Toán</button>
+        <main >
+            <table id="tableCart">
+                <thead>
+                    <th>sản phẩm</th>
+                    <th>tên</th>
+                    <th>số lượng</th>
+                    <th>giá tiền</th>
+                    <th>thành tiền</th>
+                    <th>Delete</th>
+                </thead>
+                <tr style="display: none;">
+                    <td><img src="../img/main-img2.webp" alt=""></td>
+                    <td>Blue De chanel</td>
+                    <td><div><i class="fa-solid fa-plus" style="color: #141415;"></i><i class="fa-solid fa-minus" style="color: #141415;"></i></div></td>
+                    <td>999USD</td>
+                    <td></td>
+                    <td>Delete</td>
+                </tr>
+            </table>
+        </main>
+        <a class="arrow" href="#vitri2" style=" color: rgba(14, 14, 14, 0.792);"> <i class="fa-solid fa-arrow-up " style="color: #161718;"></i> </a>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../JS/cartUser.js"></script>
+
+</html>
