@@ -1,4 +1,5 @@
 let myHistory=JSON.parse(localStorage.getItem("HistoryShop"));
+let myAcc=JSON.parse(localStorage.getItem("listUser"))
 function rederHistory(){
     let result=`<thead>
     <th>Sản Phẩm </th>
@@ -32,6 +33,8 @@ function trolaiShop(){
     location.href = "../HTML/shop.html";
 
 }
+
+myListACC()
 function deleteAll(){
     for(let i =0;i<myHistory.length;i++){
         if(myHistory[i].Status=="online"){

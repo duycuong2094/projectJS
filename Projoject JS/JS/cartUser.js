@@ -3,6 +3,7 @@ let myListProduct = JSON.parse(localStorage.getItem("CartUser")) || [];
 let historyUser = JSON.parse(localStorage.getItem("HistoryUser")) || [];
 let historyShop= JSON.parse(localStorage.getItem("HistoryShop"))||[];
 let historyCartMyUser = JSON.parse(localStorage.getItem('HistoryShop')) || [];
+let taikhoanvip=document.querySelector(".taikhoanVip");
 
 let UserAccCart = [];
 
@@ -55,8 +56,16 @@ for (let i = 0; i < arrayAcc.length; i++) {
         }
         break;
     } else if (arrayAcc[i].check == "offline" && i == arrayAcc.length - 1) {
-        alert("Tài khoản bị khóa");
-        location.href = "../HTML/homepage.html";
+        swal({
+            title: "Bạn Đã Bị  Khóa Tài Khoản!",
+            text: " ",
+            icon: "warning",
+            timer: 1000,
+            buttons: false
+          });
+          setTimeout(function() {
+            location.href = "../HTML/homepage.html";
+        }, 1000); 
     }
 }
 rederMyListProDuct()
@@ -78,15 +87,25 @@ function apartForm(id) {
     totalMoney();
 
 }
+let a=0;
 function totalMoney() {
     let total = 0;
     for (let i = 0; i < myListProduct.length; i++) {
         total += myListProduct[i].Price * myListProduct[i].quantity;
     }
     let rederTotal = "";
-    rederTotal = ` Tổng Số Tiền là : ${total} USD`
+    for(let j=0;j<arrayAcc.length;j++){
+        if(arrayAcc[j].places=="Vip"&&arrayAcc[j].check=="online"){
+            total= total*80/100;
+            taikhoanvip.style.display="block"
+        }else if(arrayAcc[j].places!="Vip"&&j==arrayAcc.length-1&&arrayAcc[j].check=="online")
+                    taikhoanvip.style.display="none"
+    }
+    rederTotal = ` Tổng Số Tiền là : ${total} USD`;
+
     myListProduct
     document.querySelector(".total").innerHTML = rederTotal;
+     a = total;
     rederMyListProDuct()
 }
 totalMoney()
@@ -102,9 +121,17 @@ function payCart() {
             objectHistoryShop.myCartHistory= myListProduct;
             objectHistoryShop.Status=arrayAcc[i].check;
             objectHistoryShop.Name=arrayAcc[i].name;
+            objectHistoryShop.checker="Đang chuẩn bị hàng"
             historyShop.push(objectHistoryShop);
             historyShop.Status=arrayAcc[i].check;
             localStorage.setItem("HistoryShop",JSON.stringify(historyShop));
+            if(a>3000){
+                arrayAcc[i].places="Vip"
+                localStorage.setItem("listUser",JSON.stringify(arrayAcc))
+            }else{
+                arrayAcc[i].places="often"
+            }
+
         }
     }
   
@@ -133,7 +160,6 @@ function payCart() {
 rederMyListProDuct()
 function Del(id) {
     myListProduct.splice(id, 1);
-    console.log(myListProduct);
     rederMyListProDuct();
     localStorage.setItem("CartUser", JSON.stringify(myListProduct));
     rederMyListProDuct();
@@ -152,7 +178,6 @@ function Del(id) {
 
 }
 rederMyListProDuct();
-
 
 
 

@@ -1,8 +1,8 @@
-let shopProductArray=JSON.parse(localStorage.getItem('adminProducts')) || [];
+let shopProductArray = JSON.parse(localStorage.getItem('adminProducts')) || [];
 let arrayAcc = JSON.parse(localStorage.getItem('listUser')) || [];
-let arrShops=shopProductArray;
-localStorage.setItem("renderShop",JSON.stringify(arrShops));
-let arrShop=JSON.parse(localStorage.getItem('renderShop'))
+let arrShops = shopProductArray;
+localStorage.setItem("renderShop", JSON.stringify(arrShops));
+let arrShop = JSON.parse(localStorage.getItem('renderShop'))
 let arrCart = JSON.parse(localStorage.getItem("CartUser")) || [];
 let detailCart = JSON.parse(localStorage.getItem("DetailCart")) || [];
 let historyShopMyUser = JSON.parse(localStorage.getItem('HistoryShop')) || [];
@@ -26,7 +26,7 @@ function shopRenderProduct() {
     </div>
     `;
   }
-  
+
   document.querySelector(".main-shop-container").innerHTML = listShopProduct;
 }
 shopRenderProduct();
@@ -49,7 +49,9 @@ for (let i = 0; i < arrayAcc.length; i++) {
         }
       }
       location.href = "../HTML/homepage.html";
-      localStorage.setItem("renderShop",JSON.stringify(arrShops));
+      localStorage.setItem("HistoryShop", JSON.stringify(historyShopMyUser))
+      localStorage.setItem("renderShop", JSON.stringify(arrShops));
+      1
     }
     function addCartShop(id) {
       swal({
@@ -72,7 +74,6 @@ for (let i = 0; i < arrayAcc.length; i++) {
         arrCart.push(arrShop[id]);
       }
       localStorage.setItem('CartUser', JSON.stringify(arrCart));
-      thongbao.style.display = "block"
     }
     function detailShop(id) {
       if (detailCart.length == 0) {
@@ -90,23 +91,23 @@ for (let i = 0; i < arrayAcc.length; i++) {
     }
     function seachProductShop() {
       let seachProducts = seachProduct.value;
-      seachProducts=seachProducts.toUpperCase();
-      arrShop=shopProductArray;
+      seachProducts = seachProducts.toUpperCase();
+      arrShop = shopProductArray;
       console.log(arrShop);
-      let checkSearch={}
-       checkSearch = arrShop.filter((e) => e.name.includes(seachProducts));
-      if(checkSearch.length!=0){
-        arrShop=[];
-        for(let i = 0;i<checkSearch.length;i++){
+      let checkSearch = {}
+      checkSearch = arrShop.filter((e) => e.name.includes(seachProducts));
+      if (checkSearch.length != 0) {
+        arrShop = [];
+        for (let i = 0; i < checkSearch.length; i++) {
 
           arrShop.push(checkSearch[i])
-        }       
-        localStorage.setItem("renderShop",JSON.stringify(arrShop));
+        }
+        localStorage.setItem("renderShop", JSON.stringify(arrShop));
 
         shopRenderProduct()
 
       }
-      if(checkSearch.length==0){
+      if (checkSearch.length == 0) {
         swal({
           title: "Không có sản phẩm muốn tìm",
           text: " ",
@@ -116,19 +117,27 @@ for (let i = 0; i < arrayAcc.length; i++) {
         });
       }
 
-      if(seachProducts.length==0){
-        checkSearch=[];
+      if (seachProducts.length == 0) {
+        checkSearch = [];
       }
       localStorage.setItem('SeachProduct', JSON.stringify(checkSearch));
 
     }
-    function backShop(){
-      localStorage.setItem("renderShop",JSON.stringify(arrShops));
+    function backShop() {
+      localStorage.setItem("renderShop", JSON.stringify(arrShops));
       location.href = "../HTML/shop.html";
     }
     break;
   } else if (arrayAcc[i].check == "offline" && i == arrayAcc.length - 1) {
-
-    location.href = "../HTML/homepage.html";
+    swal({
+      title: "Bạn Đã Bị Khóa Tài Khoản",
+      text: " ",
+      icon: "warning",
+      timer: 1000,
+      buttons: false
+    });
+    setTimeout(function () {
+      location.href = "../HTML/homepage.html";
+    }, 1000);
   }
 }
