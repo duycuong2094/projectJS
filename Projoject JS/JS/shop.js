@@ -20,7 +20,7 @@ function shopRenderProduct() {
         <div style="display:none;">${arrShop[i].Details}</div>
         <div class="shop-price">${arrShop[i].Price} USD</div>
         <div class="shop-content-product">
-        <span onclick="detailShop(${i})">Xem chi tiết</span><span onclick="addCartShop(${i})">Mua</span>
+        <span onclick="detailShop(${i})">Xem chi tiết</span><span onclick="addCartShop(${i})">Thêm</span>
         </div>
     </div>
     </div>
@@ -55,7 +55,7 @@ for (let i = 0; i < arrayAcc.length; i++) {
     }
     function addCartShop(id) {
       swal({
-        title: "Đã Mua!",
+        title: "Đã Thêm Vào Giỏ Hàng!",
         text: " ",
         icon: "success",
         timer: 1000,

@@ -27,7 +27,7 @@ formRegister.addEventListener("submit", function (e) {
     let registerPassword2s = registerPassword2.value;
   let PASSWORD_PATTERN = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
 
-    if (registerNames.length > 8 && registerNames.length < 20) {
+    if (registerNames.length >7 && registerNames.length < 20&&registerNames.trim()) {
         notification1.style.display = "none";
         if (registerPasswords.length > 8 && registerPasswords.length < 20) {
             notification2.style.display = "none";
@@ -44,6 +44,7 @@ formRegister.addEventListener("submit", function (e) {
                             password:registerPasswords,
                             status:"Đang sử dụng",
                             check:"offline"
+                                
                         }
                       arr.push(user);
                       localStorage.setItem('listUser',JSON.stringify(arr));

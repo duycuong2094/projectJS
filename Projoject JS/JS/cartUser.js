@@ -3,6 +3,7 @@ let myListProduct = JSON.parse(localStorage.getItem("CartUser")) || [];
 let historyUser = JSON.parse(localStorage.getItem("HistoryUser")) || [];
 let historyShop= JSON.parse(localStorage.getItem("HistoryShop"))||[];
 let historyCartMyUser = JSON.parse(localStorage.getItem('HistoryShop')) || [];
+let textRender=document.querySelector(".header-input");
 let taikhoanvip=document.querySelector(".taikhoanVip");
 
 let UserAccCart = [];
@@ -97,9 +98,13 @@ function totalMoney() {
     for(let j=0;j<arrayAcc.length;j++){
         if(arrayAcc[j].places=="Vip"&&arrayAcc[j].check=="online"){
             total= total*80/100;
-            taikhoanvip.style.display="block"
-        }else if(arrayAcc[j].places!="Vip"&&j==arrayAcc.length-1&&arrayAcc[j].check=="online")
+            taikhoanvip.style.display="block";
+            textRender.style.display="none"
+        }else if(arrayAcc[j].places!="Vip"&&arrayAcc[j].check=="online")
                     taikhoanvip.style.display="none"
+                    // textRender.style.display="block"
+
+
     }
     rederTotal = ` Tổng Số Tiền là : ${total} USD`;
 
@@ -110,54 +115,59 @@ function totalMoney() {
 }
 totalMoney()
 function payCart() {
-   if(myListProduct.length>0){
-    let objectHistory={};
-    let objectHistoryShop={};
-    for (let i = 0; i < arrayAcc.length; i++) {
-        if (arrayAcc[i].check == "online"&&myListProduct.length!=0) {
-            objectHistory.name=arrayAcc[i].name
-            historyUser.push(objectHistory)
-            localStorage.setItem("HistoryUser", JSON.stringify(historyUser));
-            objectHistoryShop.myCartHistory= myListProduct;
-            objectHistoryShop.Status=arrayAcc[i].check;
-            objectHistoryShop.Name=arrayAcc[i].name;
-            objectHistoryShop.checker="Đang chuẩn bị hàng"
-            historyShop.push(objectHistoryShop);
-            historyShop.Status=arrayAcc[i].check;
-            localStorage.setItem("HistoryShop",JSON.stringify(historyShop));
-            if(a>3000){
-                arrayAcc[i].places="Vip"
-                localStorage.setItem("listUser",JSON.stringify(arrayAcc))
-            }else{
-                arrayAcc[i].places="often"
-            }
-
-        }
-    }
+    if (myListProduct.length > 0) {
+      let objectHistory = {};
+      let objectHistoryShop = {};
   
-    swal({
+      for (let i = 0; i < arrayAcc.length; i++) {
+        if (arrayAcc[i].check == "online" && myListProduct.length != 0) {
+          objectHistory.name = arrayAcc[i].name;
+          historyUser.push(objectHistory);
+          localStorage.setItem("HistoryUser", JSON.stringify(historyUser));
+  
+          objectHistoryShop.myCartHistory = myListProduct;
+          objectHistoryShop.Status = arrayAcc[i].check;
+          objectHistoryShop.Name = arrayAcc[i].name;
+          objectHistoryShop.checker = "Đang chuẩn bị hàng";
+          historyShop.push(objectHistoryShop);
+          historyShop.Status = arrayAcc[i].check;
+          localStorage.setItem("HistoryShop", JSON.stringify(historyShop));
+  
+          if (a > 3000 && arrayAcc[i].places != "Vip") {
+            arrayAcc[i].places = "Vip";
+            alert("Bạn Đã Trở Thành Vip")
+            localStorage.setItem("listUser", JSON.stringify(arrayAcc));
+          } else {
+            arrayAcc[i].places = "often";
+          }
+        }
+      }
+  
+      swal({
         title: "Thanh Toán Thành Công",
         text: " ",
         icon: "success",
         timer: 1000,
-        buttons: false
+        buttons: false,
       });
-      setTimeout(function() {
+  
+      setTimeout(function () {
         myListProduct = [];
         localStorage.setItem("CartUser", JSON.stringify(myListProduct));
         location.href = "../HTML/cartUser.html";
-      }, 1000); 
-   }else{
-    swal({
+      }, 1000);
+    } else {
+      swal({
         title: "Không có sản phẩm để thanh toán",
         text: " ",
         icon: "warning",
         timer: 1000,
-        buttons: false
+        buttons: false,
       });
-   }
     }
-rederMyListProDuct()
+  }
+  
+  rederMyListProDuct();
 function Del(id) {
     myListProduct.splice(id, 1);
     rederMyListProDuct();

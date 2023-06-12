@@ -17,7 +17,7 @@ function rederDetail(){
         <div class="detail-content-3">Tham chiếu 107360</div>
         <div class="detail-content-4">Giá ${detail[0].Price } USD</div>
         <div class="detail-content-5">Dung tích 100ml</div>
-        <div class="detail-content-6" onclick="addCartD()">Mua</div>
+        <div class="detail-content-6" onclick="addCartD()">Thêm</div>
     </div>
 
 </div>
@@ -59,7 +59,7 @@ function veshop(){
 }
 function addCartD() {
     swal({
-        title: "Đã Mua!",
+        title: "Đã Thêm Vào Giỏ Hàng!",
         text: " ",
         icon: "success",
         timer: 1000,
